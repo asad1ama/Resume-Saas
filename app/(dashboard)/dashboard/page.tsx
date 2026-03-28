@@ -20,10 +20,11 @@ export default async function DashboardPage() {
     redirect("/login")
   }
 
-  const doneReviews = dbUser.reviews.filter((r: { status: string; atsScore: number | null; id: string; resumeUrl: string; createdAt: Date }) => r.status === "DONE")
+  type ReviewType = { status: string; atsScore: number | null; id: string; resumeUrl: string; createdAt: Date }
+  const doneReviews = dbUser.reviews.filter((r: ReviewType) => r.status === "DONE")
   const avgScore = doneReviews.length
-  ? Math.round(doneReviews.reduce((a: number, r) => a + (r.atsScore ?? 0), 0) / doneReviews.length)
-  : null
+    ? Math.round(doneReviews.reduce((a: number, r: ReviewType) => a + (r.atsScore ?? 0), 0) / doneReviews.length)
+    : null
 
   return (
     <main style={{ minHeight: "100vh", backgroundColor: "#f9fafb", fontFamily: "system-ui, sans-serif" }}>
