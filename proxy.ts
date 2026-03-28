@@ -3,15 +3,22 @@ import { NextResponse } from "next/server"
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth
-  const isOnDashboard = req.nextUrl.pathname.startsWith("/dashboard") ||
-    req.nextUrl.pathname.startsWith("/review") ||
-    req.nextUrl.pathname.startsWith("/billing")
+  const { pathname } = req.nextUrl
 
-  if (isOnDashboard && !isLoggedIn) {
+  const isProtected = pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/review") ||
+    pathname.startsWith("/billing")
+
+  const isAuthPage = pathname === "/login"
+  const isApiRoute = pathname.startsWith("/api")
+
+  if (isApiRoute) return NextResponse.next()
+
+  if (isProtected && !isLoggedIn) {
     return NextResponse.redirect(new URL("/login", req.url))
   }
 
-  if (isLoggedIn && req.nextUrl.pathname === "/login") {
+  if (isAuthPage && isLoggedIn) {
     return NextResponse.redirect(new URL("/dashboard", req.url))
   }
 
@@ -19,5 +26,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 }
