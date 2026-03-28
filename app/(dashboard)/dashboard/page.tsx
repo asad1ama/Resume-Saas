@@ -20,7 +20,7 @@ export default async function DashboardPage() {
     redirect("/login")
   }
 
-  const doneReviews = dbUser.reviews.filter(r => r.status === "DONE")
+  const doneReviews = dbUser.reviews.filter((r: { status: string; atsScore: number | null; id: string; resumeUrl: string; createdAt: Date }) => r.status === "DONE")
   const avgScore = doneReviews.length
     ? Math.round(doneReviews.reduce((a, r) => a + (r.atsScore ?? 0), 0) / doneReviews.length)
     : null
