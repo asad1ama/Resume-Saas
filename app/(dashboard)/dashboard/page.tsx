@@ -114,7 +114,7 @@ export default async function DashboardPage() {
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {doneReviews.map((review) => {
+                {doneReviews.map((review:ReviewType) => {
                   const score = review.atsScore ?? 0
                   const scoreColor = score >= 80 ? "#16a34a" : score >= 60 ? "#d97706" : "#dc2626"
                   return (
