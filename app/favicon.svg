@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background rounded square -->
+  <rect width="32" height="32" rx="8" fill="#7c3aed"/>
+  
+  <!-- Resume paper -->
+  <rect x="7" y="5" width="14" height="18" rx="2" fill="white" opacity="0.95"/>
+  
+  <!-- Resume lines -->
+  <rect x="9" y="9" width="8" height="1.5" rx="0.75" fill="#7c3aed" opacity="0.4"/>
+  <rect x="9" y="12" width="10" height="1" rx="0.5" fill="#7c3aed" opacity="0.3"/>
+  <rect x="9" y="14.5" width="8" height="1" rx="0.5" fill="#7c3aed" opacity="0.3"/>
+  <rect x="9" y="17" width="9" height="1" rx="0.5" fill="#7c3aed" opacity="0.3"/>
+  
+  <!-- AI Lightning bolt overlay (the crazy part) -->
+  <polygon points="20,14 17,20 19.5,20 16.5,28 23,19 20,19" fill="#facc15" stroke="#f59e0b" stroke-width="0.5"/>
+  
+  <!-- Sparkles -->
+  <circle cx="6" cy="8" r="1" fill="#facc15" opacity="0.9"/>
+  <circle cx="27" cy="12" r="0.7" fill="#facc15" opacity="0.7"/>
+  <circle cx="25" cy="6" r="1.2" fill="#facc15" opacity="0.8"/>
+</svg>
