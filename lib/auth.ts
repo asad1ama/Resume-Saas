@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
+import { prisma } from "./prisma"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
@@ -14,15 +15,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
+    async jwt({ token, user, account }) {
+      if (account && user?.email) {
+        // Create user in DB on first login
+        const dbUser = await prisma.user.upsert({
+          where: { email: user.email },
+          update: {},
+          create: {
+            email: user.email,
+            name: user.name ?? "",
+            image: user.image ?? "",
+            credits: 3,
+          },
+        })
+        token.id = dbUser.id
+        token.email = user.email
       }
       return token
     },
     session({ session, token }) {
       if (token) {
         session.user.id = token.id as string
+        session.user.email = token.email as string
       }
       return session
     },
