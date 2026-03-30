@@ -137,7 +137,7 @@ export default function LandingPage() {
             </div>
             <span style={{ fontWeight: "600", color: "#111827", fontSize: "14px" }}>ResumeAI</span>
           </div>
-          <p style={{ color: "#9ca3af", fontSize: "13px" }}>© 2024 ResumeAI. Built with Next.js and OpenAI.</p>
+          <p style={{ color: "#9ca3af", fontSize: "13px" }}>%© 2026 ResumeAI</p>
           <div style={{ display: "flex", gap: "16px" }}>
             <Link href="#" style={{ color: "#9ca3af", fontSize: "13px", textDecoration: "none" }}>Privacy</Link>
             <Link href="#" style={{ color: "#9ca3af", fontSize: "13px", textDecoration: "none" }}>Terms</Link>
