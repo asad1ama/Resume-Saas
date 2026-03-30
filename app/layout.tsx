@@ -9,6 +9,9 @@ const geist = Geist({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "ResumeAI — Get Your Resume Reviewed by AI",
   description: "Upload your resume and get instant AI-powered feedback, ATS score, and improvement suggestions.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
