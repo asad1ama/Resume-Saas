@@ -16,21 +16,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      if (account && user?.email) {
-        // Create user in DB on first login
-        const dbUser = await prisma.user.upsert({
-          where: { email: user.email },
-          update: {},
-          create: {
-            email: user.email,
-            name: user.name ?? "",
-            image: user.image ?? "",
-            credits: 3,
-          },
-        })
-        token.id = dbUser.id
-        token.email = user.email
-      }
+  if (account && user?.email) {
+    try {
+      const dbUser = await prisma.user.upsert({
+        where: { email: user.email },
+        update: { name: user.name ?? "", image: user.image ?? "" },
+        create: {
+          email: user.email,
+          name: user.name ?? "",
+          image: user.image ?? "",
+          credits: 3,
+        },
+      })
+      token.id = dbUser.id
+      token.email = user.email
+    } catch (error) {
+      console.error("DB error during login:", error)
+      token.email = user.email
+      token.name = user.name
+    }
+  }
       return token
     },
     session({ session, token }) {
